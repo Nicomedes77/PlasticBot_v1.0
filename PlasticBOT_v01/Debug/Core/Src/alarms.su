@@ -1,0 +1,4 @@
+alarms.c:26:6:ControlAlarms	16	static
+alarms.c:37:6:ActivaAlarmaLuminica	8	static
+alarms.c:42:6:ActivaAlarmaSonora	8	static
+alarms.c:47:6:DesactivaAlarmas	8	static

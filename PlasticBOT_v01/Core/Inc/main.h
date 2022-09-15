@@ -31,11 +31,25 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdbool.h"
+#include <stdint.h>
+#include <stdio.h>
+#include "math.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+typedef struct PETfilConv{
+	//variables de estado
+	bool 	soundAlarm_state;
+	bool 	lightAlarm_state;
+	bool 	col_state;
+	//variables control de temp
+	uint32_t currentExtTemp;
+	uint32_t previousSetExtTemp;
+	uint32_t setExtTemp;
+	bool flagTemp_state;
+}PETfilConv;
 
 /* USER CODE END ET */
 
@@ -70,62 +84,28 @@ void Error_Handler(void);
 #define RESET_MOTOR1_GPIO_Port GPIOA
 #define PASOS_MOTOR1_Pin GPIO_PIN_2
 #define PASOS_MOTOR1_GPIO_Port GPIOA
+#define CALENTADOR1_Pin GPIO_PIN_5
+#define CALENTADOR1_GPIO_Port GPIOA
 #define Buzzer_Pin GPIO_PIN_10
 #define Buzzer_GPIO_Port GPIOB
-#define CALENTADOR1_Pin GPIO_PIN_11
-#define CALENTADOR1_GPIO_Port GPIOB
 #define Led_Pin GPIO_PIN_15
 #define Led_GPIO_Port GPIOA
 #define Detector_fil_Pin GPIO_PIN_3
 #define Detector_fil_GPIO_Port GPIOB
+#define Detector_fil_EXTI_IRQn EXTI3_IRQn
 /* USER CODE BEGIN Private defines */
 
-typedef struct{
+//Motor colector constants
+#define APAGADO		0
+#define VELOCIDAD_1	1
+#define VELOCIDAD_2 2
+#define VELOCIDAD_3	3
 
-	float adc;
-	float temp;
-
-}adcTempTable;
-
-// Thermistor lookup table for RepRap Temperature Sensor Boards (http://make.rrrf.org/ts)
-// Made with createTemperatureLookup.py (http://svn.reprap.org/trunk/reprap/firmware/Arduino/utilities/createTemperatureLookup.py)
-// ./createTemperatureLookup.py --r0=100000 --t0=25 --r1=0 --r2=4700 --beta=3950 --max-adc=4095
-// r0: 100000
-// t0: 25
-// r1: 0
-// r2: 4700
-// beta: 3950
-// max adc: 4095
-
-#define NUMTEMPS 25
-
-static const adcTempTable tempNTC100K[NUMTEMPS] = {
-		   {1, 1835},
-		   {171, 286},
-		   {341, 233},
-		   {511, 206},
-		   {681, 187},
-		   {851, 173},
-		   {1021, 161},
-		   {1191, 151},
-		   {1361, 142},
-		   {1531, 135},
-		   {1701, 127},
-		   {1871, 121},
-		   {2041, 114},
-		   {2211, 108},
-		   {2381, 102},
-		   {2551, 96},
-		   {2721, 90},
-		   {2891, 83},
-		   {3061, 77},
-		   {3231, 70},
-		   {3401, 62},
-		   {3571, 53},
-		   {3741, 41},
-		   {3911, 25},
-		   {4081, -23}
-};
+//Rotative Encoder constants
+#define NoPressed	0
+#define Ok			1
+#define Left		2
+#define Right		3
 
 /* USER CODE END Private defines */
 

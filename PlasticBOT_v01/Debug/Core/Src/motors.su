@@ -1,4 +1,0 @@
-motors.c:29:6:ControlMotor	16	static
-motors.c:35:6:ActivarMotor	8	static
-motors.c:40:6:DesactivarMotor	8	static
-motors.c:45:6:Colector_Init	8	static

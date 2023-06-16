@@ -1,4 +1,0 @@
-controlTemp.c:29:9:GetTemp	32	static
-controlTemp.c:75:6:Control_ON_OFF	16	static
-controlTemp.c:91:6:ActivaCalentador	8	static
-controlTemp.c:95:6:DesactivaCalentador	8	static
